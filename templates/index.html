@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        /* Basic styling for the chat window */
+        #chat-window {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            height: 400px;
+            overflow-y: scroll;
+        }
+        #user-input {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat with the Bot</h1>
+    <div id="chat-window"></div>
+    <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const input = document.getElementById('user-input');
+            const message = input.value;
+            input.value = ''; // Clear input field
+
+            // Append user's message to chat window
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+
+            // Send the message to the Flask server
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded' // Use form data encoding
+                },
+                body: `message=${encodeURIComponent(message)}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Append bot's response to chat window
+                chatWindow.innerHTML += `<p><strong>Bot:</strong> ${data}</p>`;
+                chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to bottom
+            });
+        });
+    </script>
+</body>
+</html>
