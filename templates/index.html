@@ -4,26 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
+    
     <style>
-        /* Basic styling for the chat window */
-        #chat-window {
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 300px;
-            height: 400px;
-            overflow-y: scroll;
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Tahoma;
         }
+        body {
+            background-color: #8b7bbb;
+            color: #f2f2f2;
+        }
+    
+        #chat-window {
+            right: 40px;
+            bottom: 100px;
+            position: absolute;
+            width: 420px;
+            height: 510px;
+            line-height: normal;
+            justify-content: flex-end;
+            margin: 20px 0;
+            overflow-y: scroll;
+            overflow-x: fixed;
+            background-color: #724ae8;
+            border-radius: 15px;
+            box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1)
+                       0 32px 64px -48px rgba(0, 0, 0, 0.5);
+            padding: 30px 20px 70px;
+            border-bottom-left-radius: 20px;
+            border-top-left-radius: 20px;
+        }
+    
         #user-input {
-            width: 200px;
+            padding: 12px 16px;
+            margin-bottom: 15px;
+            border-radius: 10px 10px 0 10px;
+            border-color: #8b7bbb;
+            background-color: aliceblue;
+            color: #8670b8;
+            right: 40px;
+            bottom: 100px;
+            position: fixed;
+            
+        }
+    
+        #chat-form{
+            display: flex;
+            font-size: 0.95rem;
+            max-width: 75%;
+        }
+
+        #send-btn {
+            padding: 10px;
+            cursor: pointer;
+            right: 40px;
+            bottom: 78px;
+            color: #8b7bbb;
+            position: fixed;
+        }
+    
+        h1 {
+            background-color: #724ae8;
+            padding: 16px 0;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.4rem;
+        }
+        script{
+            color: blue;
+
         }
     </style>
+    
 </head>
 <body>
     <h1>Chat with the Bot</h1>
     <div id="chat-window"></div>
     <form id="chat-form">
         <input type="text" id="user-input" placeholder="Type your message here...">
-        <button type="submit">Send</button>
+        <button type="submit" id="send-btn">Send</button>
     </form>
 
     <script>
